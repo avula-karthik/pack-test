@@ -1,0 +1,54 @@
+{
+  "name": "hmis",
+  "version": "0.1.0",
+  "private": true,
+  "main": "public/main.js",
+  "homepage": "./",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "cross-env": "^7.0.3",
+    "electron-is-dev": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "concurrently -k \"BROWSER=none yarn start\" \"yarn:electron\"",
+    "dev-win":"concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn:electron\"",
+    "electron": "wait-on tcp:3000 && electron .",
+    "pack-mac": "yarn build && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=electron-assets/icon.ico --prune=true --out=release-builds ",
+    "pack-win": "yarn build && electron-packager . hmis --overwrite --asar --platform=win32 --arch=ia32 --icon=electron-assets/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"HMIS\"  ",
+    "pack-linux": "yarn build && electron-packager . hmis --overwrite --asar --platform=linux --arch=x64 --icon=electron-assets/icon.ico --prune=true --out=release-builds"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.2.2",
+    "electron": "^19.0.6",
+    "electron-packager": "^15.5.1",
+    "wait-on": "^6.0.1"
+  }
+}
